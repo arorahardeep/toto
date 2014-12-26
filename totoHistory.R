@@ -46,5 +46,8 @@ buildResults <- function(startDate) {
   }
   message("Writing File...")
   write.table(result, file="totoHistory.csv",sep=",",append=TRUE,col.names=FALSE,row.names=FALSE)
+  th <- tbl_df(result)
+  th_tidy <- gather(th, numID, numDrawn, N1:N7, na.rm=TRUE) %>% mutate(numID = extract_numeric(numID)) %>% arrange(as.Date(Date,format="%Y-%m-%d"),numID)
+  write.table(th_tidy,file="totoHistory_tidy.csv",sep=",",append=TRUE, col.names=FALSE, row.names=FALSE)
   return(result)
 }
