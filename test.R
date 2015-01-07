@@ -34,3 +34,6 @@ sat %>%
   mutate( total = sum(count),
           prop = count/total
   ) %>% print
+
+
+
